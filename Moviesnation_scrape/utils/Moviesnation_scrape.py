@@ -33,11 +33,9 @@ def moviename(movie_name):
         if 'bollydrive' in href and '1080' in text:
             bollydrive_links.append(href)
 
-    if bollydrive_links:
-        print("\n🎥 1080p BollyDrive Download Links:")
-        for link in bollydrive_links:
-            print(link)
     else:
         print("⚠️ No 1080p BollyDrive links found.")
+
+    return bollydrive_links
 
 moviename("baaghi")

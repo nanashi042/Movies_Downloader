@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Download - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .search-link {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-link:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .movie-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 0.6s ease forwards;
+            opacity: 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .movie-card:nth-child(1) { animation-delay: 0.1s; }
+        .movie-card:nth-child(2) { animation-delay: 0.2s; }
+        .movie-card:nth-child(3) { animation-delay: 0.3s; }
+        .movie-card:nth-child(4) { animation-delay: 0.4s; }
+        .movie-card:nth-child(5) { animation-delay: 0.5s; }
+        .movie-card:nth-child(6) { animation-delay: 0.6s; }
+        .movie-card:nth-child(7) { animation-delay: 0.7s; }
+        .movie-card:nth-child(8) { animation-delay: 0.8s; }
+        .movie-card:nth-child(n+9) { animation-delay: 0.9s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .movie-poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .movie-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        .movie-year {
+            font-size: 0.9rem;
+            color: #667eea;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .movie-rating {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .movie-rating .star {
+            color: #ffc107;
+            margin-right: 5px;
+        }
+
+        .movie-genre {
+            display: inline-block;
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+            margin: 3px;
+        }
+
+        .movie-genres {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .featured-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+        }
+
+        .featured-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .featured-description {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .no-movies {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .movie-card {
+                padding: 20px;
+            }
+
+            .movie-poster {
+                height: 250px;
+            }
+
+            .featured-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 Movie Download</h1>
+            <p>Your ultimate destination for movie downloads</p>
+            <a href="{% url 'mov' %}" class="search-link">🔍 Search Movies</a>
+        </div>
+
+        <h2 class="section-title">🎯 Popular Movie Suggestions</h2>
+        
+        {% if movies %}
+        <div class="movies-grid">
+            {% for movie in movies %}
+            <div class="movie-card" onclick="window.location.href='{% url 'mov' %}?query={{ movie.title|urlencode }}'">
+                <div class="movie-poster">
+                    {% if movie.poster %}
+                        <img src="{{ movie.poster }}" alt="{{ movie.title|default:'Movie' }}" onerror="this.parentElement.innerHTML='🎬'">
+                    {% else %}
+                        🎬
+                    {% endif %}
+                </div>
+                <div class="movie-title">{{ movie.title|default:"Unknown Movie" }}</div>
+                <div class="movie-year">{{ movie.year|default:"N/A" }}</div>
+                {% if movie.rating %}
+                <div class="movie-rating">
+                    <span class="star">⭐</span>{{ movie.rating }}
+                </div>
+                {% endif %}
+                <div class="movie-genres">
+                    {% if movie.genres %}
+                        {% for genre in movie.genres %}
+                            <span class="movie-genre">{{ genre }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span class="movie-genre">Drama</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-movies">
+            <p>No movies available at the moment. Please try again later.</p>
+        </div>
+        {% endif %}
+
+        <div class="featured-section">
+            <h2 class="featured-title">🎬 Explore More Movies</h2>
+            <p class="featured-description">
+                Can't find what you're looking for? Use our powerful search feature to discover thousands of movies. 
+                Search by title, genre, or any keyword to find your favorite films.
+            </p>
+            <div style="text-align: center;">
+                <a href="{% url 'mov' %}" class="search-link" style="display: inline-block;">🔍 Start Searching</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
